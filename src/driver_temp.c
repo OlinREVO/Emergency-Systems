@@ -41,7 +41,9 @@ int main (void) {
         //ADC is a macro to combine ADCL and ADCH
         uint16_t voltage = ADC; // reads in voltage into PC4
         uint16_t R_therm = ((R2 * Vin) / voltage) - R2;
-	    uint16_t temp = 1 / (a + (b * log((double)R_therm)) + (c * ((log((double)R_therm))*(log((double)R_therm))*(log((double)R_therm)))));
+	uint16_t temp = 1 / (a + (b * log((double)R_therm)) + (c * ((log((double)R_therm))*(log((double)R_therm))*(log((double)R_therm)))));
+	sendCANmsg(NODE_watchdog,MSG_data_other,temp,1);
+	
     }
 
     return 1;
